@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Open Sans';
+}
+
+.font-open-sans {
+  font-family: 'Open Sans', "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+$blue800: #1565c0;
+
+
+.bg-blue800 {
+  background-color: $blue800;
+}
+
+.blue800 {
+  color: $blue800;
+}
+
+.b--blue800 {
+  border-color: $blue800;
+}
+
+.flex-1 {
+  flex: 1;
+}
