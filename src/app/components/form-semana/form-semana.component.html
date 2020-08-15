@@ -1,1 +1,80 @@
-<p>form-semana works!</p>
+
+<div class="w6">
+  <mat-form-field class="w-100">
+    <mat-label>User</mat-label>
+    <mat-select [(ngModel)]="user" required>
+      <mat-option *ngFor="let user of users" [value]="user.id">
+        {{ user.first_name }} {{ user.last_name }} ({{ user.username }})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="">
+  <table class="w-100">
+    <thead>
+      <tr>
+        <th class="min-w5 bb">Proyecto</th>
+        <th class="min-w5 bb">Tarea</th>
+        <ng-container *ngFor="let dia of tareasUsuario; let idx=index" class="fw5">
+          <th *ngIf="idx > 1" class="fw5  bb">
+            <div>
+              {{ dia.nombre }}
+            </div>
+            <div class="f7 gray tc">
+              {{ dia.fecha | myDateFormat:"DD/MM/YYYY" }}
+            </div>
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let tukey of listaTareas">
+        <tr>
+          <td *ngFor="let tarea of tareasUsuario; let idx=index" class="bb">
+            <ng-container *ngIf="idx <= 1">
+              {{ tarea[tukey] }}
+            </ng-container>
+
+            <ng-container *ngIf="idx > 1">
+              <input type="number" [(ngModel)]="tarea[tukey]" class="w-100 tr pa2 bn">
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="w-100 tr pa3">
+  <button mat-raised-button class="ph4 pv2" (click)="abrirModal()">Agregar Tarea</button>
+  <button mat-raised-button class="ph4 pv2" (click)="guardar()">Guardar</button>
+</div>
+
+
+
+<app-modal [mostrar]="mostrarModal">
+  <div class="ph3">
+    <mat-form-field class="w-100">
+      <mat-label>Proyecto</mat-label>
+      <mat-select [(ngModel)]="proyecto" required>
+        <mat-option *ngFor="let proyecto of proyectos" [value]="proyecto.id">
+          {{ proyecto.nombre }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Tarea</mat-label>
+      <mat-select [(ngModel)]="tarea" required>
+        <mat-option *ngFor="let tarea of tareas" [value]="tarea.id">
+          {{ tarea.nombre }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="pv3">
+      <button mat-raised-button class="w-100" (click)="agregarTarea()">Agregar</button>
+    </div>
+  </div>
+</app-modal>

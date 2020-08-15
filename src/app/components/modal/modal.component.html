@@ -1,0 +1,18 @@
+<ng-container *ngIf="mostrar">
+  <div class="fixed vh-100 dt w-100 bg-black-60 top-0 bottom-0 z-999 o-1-hover left-0 right-0">
+    <div class="dtc v-mid ph3 z-max">
+      <div class="bg-white w6 center tc relative f4 shadow-1 ba b--gray ph3 pt3 pb4 br2">
+        <div class="tr pa2">
+          <span class="pointer" (click)="cerrar()">
+            <i class="fas fa-times"></i>
+          </span>
+        </div>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
+
+
+
