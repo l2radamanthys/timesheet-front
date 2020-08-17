@@ -1,5 +1,5 @@
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
@@ -14,6 +14,19 @@ export class TareasProyectosService {
 
   public all() {
     return this.http.get(this.baseUrl).pipe(map((response: any) => {
+      return response;
+    }));
+  }
+
+  public actualizar(formData) {
+    return this.http.post(this.baseUrl + '/actualizar', JSON.stringify(formData)).pipe(map((response: any) => {
+      return response;
+    }));
+  }
+
+  public query(parametros: any) {
+    const params = new HttpParams({ fromObject: parametros });
+    return this.http.get(this.baseUrl, { params: params }).pipe(map((response: any) => {
       return response;
     }));
   }

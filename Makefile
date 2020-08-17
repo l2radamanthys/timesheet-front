@@ -2,12 +2,12 @@ APP_VERSION=$(shell echo `node -pe 'require("./package.json").version'`)
 NODE_VERSION=$(shell echo `node -v`)
 RUNNER=$(shell whoami)
 
-N=[0m
-R=[00;31m
-G=[01;32m
-Y=[01;33m
-B=[01;34m
-L=[01;30m
+N=[0m
+R=[00;31m
+G=[01;32m
+Y=[01;33m
+B=[01;34m
+L=[01;30m
 
 comandos: welcome
 	@echo "${B} COMANDOS DISPONIBLES"
