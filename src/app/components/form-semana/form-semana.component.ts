@@ -87,6 +87,7 @@ export class FormSemanaComponent implements OnInit {
       this.tareasUsuario.push({
         fecha: dia,
         nombre: NOMBRE_DIAS[dia.weekday()],
+        total: 0,
       });
       listaFechas.push(dia.format('YYYY-MM-DD'));
     }
@@ -96,9 +97,11 @@ export class FormSemanaComponent implements OnInit {
       this.tareasUsuario.push({
         fecha: dia,
         nombre: NOMBRE_DIAS[dia.weekday()],
+        total: 0,
       });
       listaFechas.push(dia.format('YYYY-MM-DD'));
     }
+    this.tareasUsuario.push({ total: 0 }); // total
 
     if (this.user) {
       this.tareasProyectosService.query({
@@ -123,6 +126,9 @@ export class FormSemanaComponent implements OnInit {
           // const tid = this.listaTareas.indexOf(tpkey);
           const fid = listaFechas.indexOf(tp.fecha) + 2;
           this.tareasUsuario[fid][tpkey] = tp.horas;
+          this.tareasUsuario[fid].total += tp.horas;
+          this.tareasUsuario[9][tpkey] += tp.horas;
+          this.tareasUsuario[9].total += tp.horas;
         });
         this.blockUI.stop();
       });
@@ -172,11 +178,11 @@ export class FormSemanaComponent implements OnInit {
     // console.log(JSON.stringify(this.tareasUsuario, null, '  '));
     let tareas = [];
     this.tareasUsuario.forEach((tu, idx) => {
-      if (idx > 1) {
+      if (idx > 1 && idx !== 9) {
         const fecha = moment(tu.fecha).format('YYYY-MM-DD');
         Object.keys(tu).forEach(key_ => {
           // console.log(key_)
-          if (key_ !== 'fecha' && key_ !== 'nombre') {
+          if (key_ !== 'fecha' && key_ !== 'nombre'  && key_ !== 'total') {
             const pd = key_.split('-');
             tareas.push({
               fecha: fecha,
@@ -193,8 +199,8 @@ export class FormSemanaComponent implements OnInit {
     this.tareasProyectosService.actualizar({
       tareas: JSON.stringify(tareas)
     }).subscribe(response => {
-      // console.log(response);
       this.blockUI.stop();
+      this.calcularPeriodo();
     });
   }
 }

@@ -25,7 +25,7 @@
           <th class="min-w5 bb">Proyecto</th>
           <th class="min-w5 bb">Tarea</th>
           <ng-container *ngFor="let dia of tareasUsuario; let idx=index" class="fw5">
-            <th *ngIf="idx > 1" class="fw5  bb">
+            <th *ngIf="idx > 1 && idx < 9" class="fw5 bb">
               <div>
                 {{ dia.nombre }}
               </div>
@@ -34,22 +34,36 @@
               </div>
             </th>
           </ng-container>
+          <th class="bb">Total</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let tukey of listaTareas">
           <tr>
             <td *ngFor="let tarea of tareasUsuario; let idx=index" class="bb b--gray">
+              {{tarea | log}}
               <ng-container *ngIf="idx <= 1">
-                {{ tarea[tukey] }}
+                <span class="f6">{{ tarea[tukey] }}</span>
               </ng-container>
 
-              <ng-container *ngIf="idx > 1">
+              <ng-container *ngIf="idx > 1 && idx < 9">
                 <input type="number" min="0" [(ngModel)]="tarea[tukey]" class="w-100 tr pa2 bn">
+              </ng-container>
+
+              <ng-container *ngIf="idx === 9">
+                <div class="tr pr15rem">{{ tarea[tukey] }}</div>
               </ng-container>
             </td>
           </tr>
         </ng-container>
+        <tr *ngIf="listaTareas.length !== 0">
+          <td colspan="2" class="bb b--gray pa2 bg-light-gray fw7">Total</td>
+          <ng-container *ngFor="let tarea of tareasUsuario; let idx=index">
+            <td *ngIf="idx > 1" class="bb b--gray bg-light-gray pv2 pr1 pr15rem tr fw7">
+              {{ tarea.total }}
+            </td>
+          </ng-container>
+        </tr>
 
         <tr *ngIf="listaTareas.length === 0">
           <td colspan="9" class="tc pa3">
@@ -74,7 +88,7 @@
       <mat-label>Proyecto</mat-label>
       <mat-select [(ngModel)]="proyecto">
         <mat-option *ngFor="let proyecto of proyectos" [value]="proyecto.id">
-          {{ proyecto.nombre }})
+          {{ proyecto.nombre }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -83,7 +97,7 @@
       <mat-label>Tarea</mat-label>
       <mat-select [(ngModel)]="tarea">
         <mat-option *ngFor="let tarea of tareas" [value]="tarea.id">
-          {{ tarea.nombre }})
+          {{ tarea.nombre }}
         </mat-option>
       </mat-select>
     </mat-form-field>
