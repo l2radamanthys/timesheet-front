@@ -33,4 +33,4 @@ compilar:
 	@ng build --prod --output-hashing none
 
 actualizar_backend:
-	@cp -fr dist/mis-cuentas-front/* ~/Workspace/Python/timesheet/static/dist
+	@cp -fr dist/timesheet-front/* ~/Workspace/Python/timesheet/static/dist

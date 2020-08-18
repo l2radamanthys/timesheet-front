@@ -89,7 +89,6 @@ export class FormSemanaComponent implements OnInit {
         nombre: NOMBRE_DIAS[dia.weekday()],
       });
       listaFechas.push(dia.format('YYYY-MM-DD'));
-
     }
 
     for (let j = diaSemana + 1; j < 7; j++) {
@@ -123,18 +122,18 @@ export class FormSemanaComponent implements OnInit {
           }
           // const tid = this.listaTareas.indexOf(tpkey);
           const fid = listaFechas.indexOf(tp.fecha) + 2;
-          // console.log("f", this.tareasUsuario[fid]);
           this.tareasUsuario[fid][tpkey] = tp.horas;
-          this.blockUI.stop();
         });
+        this.blockUI.stop();
       });
     } else {
       this.blockUI.stop();
     }
   }
 
-  moverFechaPivote() {
-    // pass
+  moverFechaPivote(dias) {
+    this.fechaPivote.add(dias, 'day');
+    this.calcularPeriodo();
   }
 
   cuandoCambiaUser(event) {
@@ -156,7 +155,6 @@ export class FormSemanaComponent implements OnInit {
             tu[tpkey] = 0;
           }
         });
-
         // console.log(JSON.stringify(this.tareasUsuario, null, '  '));
         this.tarea = null;
         this.proyecto = null;
@@ -195,7 +193,7 @@ export class FormSemanaComponent implements OnInit {
     this.tareasProyectosService.actualizar({
       tareas: JSON.stringify(tareas)
     }).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.blockUI.stop();
     });
   }

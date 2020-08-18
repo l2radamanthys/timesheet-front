@@ -1,13 +1,20 @@
 
-<div class="w6">
-  <mat-form-field class="w-100">
-    <mat-label>User</mat-label>
-    <mat-select [(ngModel)]="user" (selectionChange)="cuandoCambiaUser($event)">
-      <mat-option *ngFor="let user of users" [value]="user.id">
-        {{ user.first_name }} {{ user.last_name }} ({{ user.username }})
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<div class="flex">
+  <div class="w6">
+    <mat-form-field class="w-100">
+      <mat-label>User</mat-label>
+      <mat-select [(ngModel)]="user" (selectionChange)="cuandoCambiaUser($event)">
+        <mat-option *ngFor="let user of users" [value]="user.id">
+          {{ user.first_name }} {{ user.last_name }} ({{ user.username }})
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="flex1 tr pb3 ph3" *ngIf="user">
+    <button mat-raised-button class="ph4 pv2" (click)="moverFechaPivote(-7)"><i class="fas fa-caret-left"></i></button>
+    &nbsp;
+    <button mat-raised-button class="ph4 pv2" (click)="moverFechaPivote(7)"><i class="fas fa-caret-right"></i></button>
+  </div>
 </div>
 
 <ng-container *ngIf="user">
@@ -38,7 +45,7 @@
               </ng-container>
 
               <ng-container *ngIf="idx > 1">
-                <input type="number" [(ngModel)]="tarea[tukey]" class="w-100 tr pa2 bn">
+                <input type="number" min="0" [(ngModel)]="tarea[tukey]" class="w-100 tr pa2 bn">
               </ng-container>
             </td>
           </tr>
@@ -55,6 +62,7 @@
 
   <div class="w-100 tr pa3">
     <button mat-raised-button class="ph4 pv2" (click)="abrirModal()">Agregar Tarea</button>
+    &nbsp;
     <button mat-raised-button class="ph4 pv2" (click)="guardar()">Guardar</button>
   </div>
 </ng-container>
@@ -80,7 +88,7 @@
       </mat-select>
     </mat-form-field>
     <div class="pv3">
-      <button mat-raised-button class="w-100" (click)="agregarTarea()">Agregar</button>
+      <button mat-raised-button class="w-100 ph4 pv2" (click)="agregarTarea()">Agregar</button>
     </div>
   </div>
 </app-modal>
