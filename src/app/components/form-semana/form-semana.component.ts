@@ -170,7 +170,8 @@ export class FormSemanaComponent implements OnInit {
   }
 
   abrirModal() {
-    this.mostrarModal = true;
+    // this.mostrarModal = true;
+    this.blockUI.start();
   }
 
   guardar() {
