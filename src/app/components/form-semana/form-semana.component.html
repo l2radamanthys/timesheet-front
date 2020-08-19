@@ -22,8 +22,8 @@
     <table class="w-100 collapse">
       <thead>
         <tr>
-          <th class="min-w5 bb">Proyecto</th>
-          <th class="min-w5 bb">Tarea</th>
+          <th class="min-w5 bb b--gray">Proyecto</th>
+          <th class="min-w5 bb b--gray">Tarea</th>
           <ng-container *ngFor="let dia of tareasUsuario; let idx=index" class="fw5">
             <th *ngIf="idx > 1 && idx < 9" class="fw5 bb">
               <div>
@@ -34,14 +34,13 @@
               </div>
             </th>
           </ng-container>
-          <th class="bb">Total</th>
+          <th class="bb b--gray">Total</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let tukey of listaTareas">
           <tr>
-            <td *ngFor="let tarea of tareasUsuario; let idx=index" class="bb b--gray">
-              {{tarea | log}}
+            <td *ngFor="let tarea of tareasUsuario; let idx=index" class="bb b--light-gray">
               <ng-container *ngIf="idx <= 1">
                 <span class="f6">{{ tarea[tukey] }}</span>
               </ng-container>
@@ -51,15 +50,15 @@
               </ng-container>
 
               <ng-container *ngIf="idx === 9">
-                <div class="tr pr15rem">{{ tarea[tukey] }}</div>
+                <div class="tr pr15rem fw7">{{ tarea[tukey] }}</div>
               </ng-container>
             </td>
           </tr>
         </ng-container>
         <tr *ngIf="listaTareas.length !== 0">
-          <td colspan="2" class="bb b--gray pa2 bg-light-gray fw7">Total</td>
+          <td colspan="2" class="bb b--light-gray pa2 bg-light-gray fw7">Total</td>
           <ng-container *ngFor="let tarea of tareasUsuario; let idx=index">
-            <td *ngIf="idx > 1" class="bb b--gray bg-light-gray pv2 pr1 pr15rem tr fw7">
+            <td *ngIf="idx > 1" class="bb b--light-gray bg-light-gray pv2 pr1 pr15rem tr fw7">
               {{ tarea.total }}
             </td>
           </ng-container>
@@ -82,7 +81,7 @@
 </ng-container>
 
 
-<app-modal [mostrar]="mostrarModal">
+<app-modal [mostrar]="mostrarModal" (mostrarChange)="mostrarModal=$event">
   <div class="ph3">
     <mat-form-field class="w-100">
       <mat-label>Proyecto</mat-label>
@@ -106,6 +105,3 @@
     </div>
   </div>
 </app-modal>
-
-
-{{ user | log }}

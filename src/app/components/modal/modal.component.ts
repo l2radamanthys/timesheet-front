@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
 
@@ -10,6 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ModalComponent implements OnInit {
   @Input() mostrar: boolean;
   @Input() contenedor: boolean;
+  @Output() mostrarChange = new EventEmitter<boolean>();
 
   constructor() {
     this.mostrar = false;
@@ -18,8 +19,8 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {}
 
-
   cerrar() {
     this.mostrar = false;
+    this.mostrarChange.emit(this.mostrar);
   }
 }
