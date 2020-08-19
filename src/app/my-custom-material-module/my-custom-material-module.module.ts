@@ -9,11 +9,14 @@ import {
   MatCheckboxModule,
   MatDatepickerModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
   MatNativeDateModule,
   MatSelectModule,
   MatSlideToggleModule,
+  MatSnackBarModule,
   MatTabsModule,
+  MatToolbarModule,
   MatTooltipModule
   } from '@angular/material';
 import { environment } from './../../environments/environment';
@@ -34,8 +37,11 @@ import { MOMENT_DATE_FORMATS, MomentDateAdapter } from './moment-date-adapter';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
     MatTabsModule,
     MatTooltipModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   exports: [
     BrowserAnimationsModule,
@@ -48,8 +54,11 @@ import { MOMENT_DATE_FORMATS, MomentDateAdapter } from './moment-date-adapter';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
     MatTabsModule,
     MatTooltipModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   providers: [
     // {provide: DateAdapter, useClass: MyDateAdapter},

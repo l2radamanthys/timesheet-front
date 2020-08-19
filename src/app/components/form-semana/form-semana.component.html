@@ -10,22 +10,30 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="flex1 tr pb3 ph3" *ngIf="user">
-    <button mat-raised-button class="ph4 pv2" (click)="moverFechaPivote(-7)"><i class="fas fa-caret-left"></i></button>
+  <div class="flex1 tr pb3 ph3"*ngIf="user">
+    <button mat-mini-fab class="mat-mini-fav-d" (click)="moverFechaPivote(-7)">
+      <mat-icon>arrow_left</mat-icon>
+    </button>
     &nbsp;
-    <button mat-raised-button class="ph4 pv2" (click)="moverFechaPivote(7)"><i class="fas fa-caret-right"></i></button>
+    <button mat-mini-fab class="mat-mini-fav-d" (click)="moverFechaPivote(7)">
+      <mat-icon>arrow_right</mat-icon>
+    </button>
   </div>
 </div>
 
+<div>
+
+</div>
+
 <ng-container *ngIf="user">
-  <div class="">
+  <div class="shadow-1 mv2">
     <table class="w-100 collapse">
       <thead>
         <tr>
-          <th class="min-w5 bb b--gray">Proyecto</th>
-          <th class="min-w5 bb b--gray">Tarea</th>
+          <th class="min-w5 bb b--gray pa2">Proyecto</th>
+          <th class="min-w5 bb b--gray pa2">Tarea</th>
           <ng-container *ngFor="let dia of tareasUsuario; let idx=index" class="fw5">
-            <th *ngIf="idx > 1 && idx < 9" class="fw5 bb">
+            <th *ngIf="idx > 1 && idx < 9" class="fw5 bb b--gray pa2">
               <div>
                 {{ dia.nombre }}
               </div>
@@ -34,7 +42,7 @@
               </div>
             </th>
           </ng-container>
-          <th class="bb b--gray">Total</th>
+          <th class="bb b--gray tc ph2">Total</th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +50,7 @@
           <tr>
             <td *ngFor="let tarea of tareasUsuario; let idx=index" class="bb b--light-gray">
               <ng-container *ngIf="idx <= 1">
-                <span class="f6">{{ tarea[tukey] }}</span>
+                <div class="f6 ph2">{{ tarea[tukey] }}</div>
               </ng-container>
 
               <ng-container *ngIf="idx > 1 && idx < 9">
@@ -58,7 +66,7 @@
         <tr *ngIf="listaTareas.length !== 0">
           <td colspan="2" class="bb b--light-gray pa2 bg-light-gray fw7">Total</td>
           <ng-container *ngFor="let tarea of tareasUsuario; let idx=index">
-            <td *ngIf="idx > 1" class="bb b--light-gray bg-light-gray pv2 pr1 pr15rem tr fw7">
+            <td *ngIf="idx > 1" class="bb b--light-gray bg-light-gray pv3 pr1 pr15rem tr fw7">
               {{ tarea.total }}
             </td>
           </ng-container>

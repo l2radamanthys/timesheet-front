@@ -6,20 +6,26 @@ body {
   font-family: 'Open Sans', "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
+md-icon {
+  font-family: 'Material Icons' !important;
+}
+
 $blue800: #1565c0;
+$pink900: #880e4f;
+$pink500: #e91e63;
+$blue-gray500: #607d8b;
 
+.bg-blue-gray-500 { background-color: $blue-gray500; }
+.blue-gray-500 { color: $blue-gray500; }
+.b--blue-gray-500 { border-color: $blue-gray500; }
 
-.bg-blue800 {
-  background-color: $blue800;
-}
+.bg-blue-800 { background-color: $blue800; }
+.blue-800 { color: $blue800; }
+.b--blue-800 { border-color: $blue800; }
 
-.blue800 {
-  color: $blue800;
-}
-
-.b--blue800 {
-  border-color: $blue800;
-}
+.bg-pink-900 { background-color: $pink900; }
+.pink-900 { color: $pink900; }
+.b--pink-900 { border-color: $pink900; }
 
 .flex1 {
   flex: 1;
@@ -28,6 +34,14 @@ $blue800: #1565c0;
 .w6 { width: 32rem; }
 
 .w7 { width: 64rem; }
+
+
+.mat-mini-fav-d {
+  mat-icon {
+    background-color: $pink500 !important;
+    color: white;
+  }
+}
 
 // body {
 //   background-image: url('/assets/site-background-image.png');

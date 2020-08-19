@@ -7,6 +7,7 @@ import { TareasProyectosService } from 'src/app/services/tareas-proyectos.servic
 import { TareasService } from 'src/app/services/tareas.service';
 import { UsersService } from 'src/app/services/users.service';
 // import 'moment/locale/es-ar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -43,7 +44,8 @@ export class FormSemanaComponent implements OnInit {
     private usersService: UsersService,
     private tareasService: TareasService,
     private proyectosService: ProyectosService,
-    private tareasProyectosService: TareasProyectosService
+    private tareasProyectosService: TareasProyectosService,
+    private _snackBar: MatSnackBar
   ) {
     this.users = [];
     this.tareas = [];
@@ -201,6 +203,15 @@ export class FormSemanaComponent implements OnInit {
     }).subscribe(response => {
       this.blockUI.stop();
       this.calcularPeriodo();
+      this._snackBar.open(
+        'Datos guardados!',
+        null,
+        {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+        }
+      );
     });
   }
 }
