@@ -80,7 +80,7 @@ export class FormSemanaComponent implements OnInit {
 
   calcularPeriodo() {
     this.blockUI.start();
-    this.tareasUsuario = [{}, {}];
+    this.tareasUsuario = [{}, {}, {}];
     this.listaTareas = [];
     let listaFechas = [];
     const diaSemana = this.fechaPivote.weekday();
@@ -94,7 +94,7 @@ export class FormSemanaComponent implements OnInit {
       listaFechas.push(dia.format('YYYY-MM-DD'));
     }
 
-    for (let j = diaSemana + 1; j < 7; j++) {
+    for (let j = diaSemana + 2; j < 8; j++) {
       const dia = this.fechaPivote.clone().add(j - diaSemana, 'day');
       this.tareasUsuario.push({
         fecha: dia,
@@ -103,12 +103,12 @@ export class FormSemanaComponent implements OnInit {
       });
       listaFechas.push(dia.format('YYYY-MM-DD'));
     }
-    this.tareasUsuario.push({ total: 0 }); // total
+    this.tareasUsuario.push({ total_nf: 0, tota_f: 0 }); // total
 
     if (this.user) {
       this.tareasProyectosService.query({
-        desde: this.tareasUsuario[2].fecha.format('YYYY-MM-DD'),
-        hasta: this.tareasUsuario[8].fecha.format('YYYY-MM-DD'),
+        desde: this.tareasUsuario[3].fecha.format('YYYY-MM-DD'),
+        hasta: this.tareasUsuario[9].fecha.format('YYYY-MM-DD'),
         user_id: this.user,
       }).subscribe(tareasProyecto => {
         tareasProyecto.forEach(tp => {
@@ -120,17 +120,19 @@ export class FormSemanaComponent implements OnInit {
             this.tareasUsuario[0][tpkey] = proyecto.nombre;
             this.tareasUsuario[1][tpkey] = tarea.nombre;
             this.tareasUsuario.forEach((tu, idx) => {
-              if (idx > 1) {
+              if (idx > 2) {
                 tu[tpkey] = 0;
               }
             });
           }
           // const tid = this.listaTareas.indexOf(tpkey);
           const fid = listaFechas.indexOf(tp.fecha) + 2;
+          /*
           this.tareasUsuario[fid][tpkey] = tp.horas;
           this.tareasUsuario[fid].total += tp.horas;
           this.tareasUsuario[9][tpkey] += tp.horas;
           this.tareasUsuario[9].total += tp.horas;
+          */
         });
         this.blockUI.stop();
       });
@@ -159,8 +161,8 @@ export class FormSemanaComponent implements OnInit {
         this.tareasUsuario[0][tpkey] = proyecto.nombre;
         this.tareasUsuario[1][tpkey] = tarea.nombre;
         this.tareasUsuario.forEach((tu, idx) => {
-          if (idx > 1) {
-            tu[tpkey] = 0;
+          if (idx > 2) {
+            tu[tpkey] = { fact: 0, nfact: 0 };
           }
         });
         // console.log(JSON.stringify(this.tareasUsuario, null, '  '));
@@ -177,10 +179,10 @@ export class FormSemanaComponent implements OnInit {
 
   guardar() {
     this.blockUI.start();
-    // console.log(JSON.stringify(this.tareasUsuario, null, '  '));
+    console.log(JSON.stringify(this.tareasUsuario, null, '  '));
     let tareas = [];
     this.tareasUsuario.forEach((tu, idx) => {
-      if (idx > 1 && idx !== 9) {
+      if (idx > 2 && idx !== 9) {
         const fecha = moment(tu.fecha).format('YYYY-MM-DD');
         Object.keys(tu).forEach(key_ => {
           // console.log(key_)
@@ -191,7 +193,8 @@ export class FormSemanaComponent implements OnInit {
               user_id: this.user,
               proyecto_id: pd[0],
               tarea_id: pd[1],
-              horas: tu[key_]
+              horas_facturables: tu[key_].fact,
+              horas_no_facturables: tu[key].nfact
             });
           }
         });

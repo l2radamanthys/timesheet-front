@@ -1,0 +1,3 @@
+
+colorscheme novum
+au BufReadPost *.hbs set syntax=mustache

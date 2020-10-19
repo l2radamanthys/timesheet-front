@@ -1,4 +1,3 @@
-
 <div class="flex">
   <div class="w6">
     <mat-form-field class="w-100">
@@ -32,8 +31,9 @@
         <tr>
           <th class="min-w5 bb b--gray pa2">Proyecto</th>
           <th class="min-w5 bb b--gray pa2">Tarea</th>
+          <th class="bb b--gray pa2"></th>
           <ng-container *ngFor="let dia of tareasUsuario; let idx=index" class="fw5">
-            <th *ngIf="idx > 1 && idx < 9" class="fw5 bb b--gray pa2">
+            <th *ngIf="idx > 2 && idx < 9" class="fw5 bb b--gray pa2">
               <div>
                 {{ dia.nombre }}
               </div>
@@ -49,16 +49,37 @@
         <ng-container *ngFor="let tukey of listaTareas">
           <tr>
             <td *ngFor="let tarea of tareasUsuario; let idx=index" class="bb b--light-gray">
-              <ng-container *ngIf="idx <= 1">
+              <ng-container *ngIf="idx === 0">
                 <div class="f6 ph2">{{ tarea[tukey] }}</div>
               </ng-container>
 
-              <ng-container *ngIf="idx > 1 && idx < 9">
-                <input type="number" min="0" [(ngModel)]="tarea[tukey]" class="w-100 tr pa2 bn">
+              <ng-container *ngIf="idx === 1">
+                <div class="f6 ph2">{{ tarea[tukey] }}</div>
+              </ng-container>
+
+              <ng-container *ngIf="idx === 2">
+                <div class="pr1">
+                  <div class="pv2 f7">
+                    Facturable
+                  </div>
+                  <div class="pv2 f7">
+                    No Facturable
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="idx > 2 && idx < 9">
+                <div>
+                  <input type="number" min="0" [(ngModel)]="tarea[tukey].fact" class="w-100 tr pa2 bn">
+                </div>
+                <div>
+                  <input type="number" min="0" [(ngModel)]="tarea[tukey].nfact" class="w-100 tr pa2 bn">
+                </div>
               </ng-container>
 
               <ng-container *ngIf="idx === 9">
-                <div class="tr pr15rem fw7">{{ tarea[tukey] }}</div>
+                <div class="tr pr15rem fw7">{{ tarea[tukey].total_f }}</div>
+                <div class="tr pr15rem fw7">{{ tarea[tukey].total_nf }}</div>
               </ng-container>
             </td>
           </tr>
@@ -113,3 +134,5 @@
     </div>
   </div>
 </app-modal>
+
+
